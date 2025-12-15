@@ -42,7 +42,6 @@
         ul { list-style: none; }
 
         /* --- ANIMACIONES --- */
-        /* Animación de entrada suave hacia arriba */
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -54,16 +53,14 @@
             }
         }
 
-        /* Animación de flotación continua */
         @keyframes float {
             0% { box-shadow: 0 20px 50px rgba(0,0,0,0.2); transform: translateY(0px); }
             50% { box-shadow: 0 25px 60px rgba(0,0,0,0.3); transform: translateY(-15px); }
             100% { box-shadow: 0 20px 50px rgba(0,0,0,0.2); transform: translateY(0px); }
         }
 
-        /* Clases utilitarias para animación */
         .animate-fade-up {
-            opacity: 0; /* Inicialmente invisible */
+            opacity: 0;
             animation: fadeUp 0.8s ease-out forwards;
         }
 
@@ -105,7 +102,6 @@
             box-shadow: 0 6px 20px rgba(0, 150, 136, 0.6);
         }
 
-        /* Botón outline adaptado para fondo oscuro */
         .btn-outline-light {
             border: 2px solid rgba(255,255,255,0.3);
             color: var(--white);
@@ -161,24 +157,28 @@
 
         .nav-links a:hover { color: var(--primary); }
 
-        /* --- Hero Section (MODIFICADO CON FOTO) --- */
+        /* --- Hero Section (CORRECCIÓN DE CENTRADO Y ALTURA) --- */
         .hero {
-            /* Imagen de fondo de comunidad tech */
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(0, 150, 136, 0.8) 100%),
                         url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Efecto parallax sutil */
+            background-attachment: fixed;
             
-            padding: 140px 0 100px; /* Más espacio arriba y abajo */
+            padding: 140px 0 100px;
+            min-height: 90vh; /* Se asegura una altura mínima */
+            color: var(--white);
+        }
+        
+        /* Contenedor interno del Grid */
+        .hero > .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            align-items: center;
             gap: 60px;
-            min-height: 90vh;
-            color: var(--white); /* Texto blanco para contraste */
+            align-items: center;
+            height: 100%; /* Asegura que el grid ocupe toda la altura disponible */
         }
-
+        
         .hero-content h1 {
             font-size: 3.8rem;
             font-weight: 800;
@@ -187,26 +187,30 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
-        .hero-content span { color: var(--accent); } /* Usamos el color de acento (amarillo) para resaltar sobre fondo oscuro */
+        .hero-content span { color: var(--accent); }
 
         .hero-content p {
             font-size: 1.2rem;
-            color: rgba(255,255,255,0.9); /* Blanco con ligera transparencia */
+            color: rgba(255,255,255,0.9);
             margin-bottom: 35px;
             max-width: 90%;
             font-weight: 400;
         }
 
-        /* Bloque de código decorativo (Con animación float) */
+        /* Bloque de código decorativo (CORRECCIÓN DE ANCHO Y CENTRADO) */
         .code-window {
-            background: rgba(15, 23, 42, 0.95); /* Ligeramente transparente */
+            background: rgba(15, 23, 42, 0.95);
             border-radius: 12px;
-            /* Shadow se maneja en la animación float */
             overflow: hidden;
             font-family: 'Courier New', monospace;
             position: relative;
             border: 1px solid rgba(255,255,255,0.1);
             backdrop-filter: blur(5px);
+            
+            /* Corrección para centrar dentro de la columna del grid */
+            max-width: 550px; /* Limita el ancho máximo para que no se estire demasiado */
+            width: 100%; /* Permite que sea flexible */
+            justify-self: center; /* Centra el elemento horizontalmente en su celda del grid */
         }
 
         .window-header {
@@ -227,6 +231,7 @@
             color: #e2e8f0;
             font-size: 0.95rem;
             line-height: 1.7;
+            overflow-x: auto; /* Permite scroll horizontal si el contenido es demasiado largo */
         }
 
         .kwd { color: #c678dd; font-weight: bold; }
@@ -234,156 +239,53 @@
         .str { color: #98c379; }
         .comment { color: #7f848e; font-style: italic; }
 
-        /* --- Features Section --- */
-        .features {
-            padding: 100px 0;
-            background-color: var(--white);
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
+        /* --- Resto de Estilos (Mantenidos sin cambios) --- */
+        .features { padding: 100px 0; background-color: var(--white); position: relative; }
+        .section-title { text-align: center; margin-bottom: 70px; }
+        .section-title h2 { font-size: 2.5rem; font-weight: 800; color: var(--dark); margin-bottom: 15px; }
         .section-title p { color: #64748b; font-size: 1.1rem; }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-
-        .card {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 16px;
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: transparent;
-            box-shadow: 0 20px 40px -10px rgba(0, 150, 136, 0.15);
-        }
-
-        .icon-box {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 20px -10px rgba(0, 150, 136, 0.3);
-        }
-
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .card { background: var(--white); padding: 40px 30px; border-radius: 16px; border: 1px solid #f1f5f9; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        .card:hover { transform: translateY(-10px); border-color: transparent; box-shadow: 0 20px 40px -10px rgba(0, 150, 136, 0.15); }
+        .icon-box { width: 70px; height: 70px; background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 16px; font-size: 1.8rem; margin-bottom: 25px; box-shadow: 0 10px 20px -10px rgba(0, 150, 136, 0.3); }
         .card h3 { margin-bottom: 15px; color: var(--dark); font-size: 1.3rem;}
-
-        /* --- Bolivia Banner --- */
-        .bolivia-banner {
-            background: var(--gradient);
-            padding: 80px 0;
-            color: var(--white);
-            text-align: center;
-            position: relative;
-        }
-
-        /* Línea tricolor sutil */
-        .bolivia-banner::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 6px;
-            background: linear-gradient(to right, #D52B1E 33%, #F9CC00 33%, #F9CC00 66%, #007934 66%);
-        }
-
-        .stats-grid {
-            display: flex;
-            justify-content: center;
-            gap: 100px;
-            margin-top: 50px;
-            flex-wrap: wrap;
-        }
-
+        .bolivia-banner { background: var(--gradient); padding: 80px 0; color: var(--white); text-align: center; position: relative; }
+        .bolivia-banner::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(to right, #D52B1E 33%, #F9CC00 33%, #F9CC00 66%, #007934 66%); }
+        .stats-grid { display: flex; justify-content: center; gap: 100px; margin-top: 50px; flex-wrap: wrap; }
         .stat-item h4 { font-size: 3.5rem; color: var(--primary); font-weight: 800; margin-bottom: 5px;}
         .stat-item p { font-size: 1.2rem; font-weight: 600; letter-spacing: 1px; }
-
-        /* --- Event Cards Specifics --- */
         .event-card small { display: block; margin-bottom: 10px; letter-spacing: 1px; }
         .event-link { color: var(--primary); font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
         .event-link:hover { gap: 10px; }
-
-        /* --- Footer --- */
-        footer {
-            background: var(--dark);
-            color: #94a3b8;
-            padding: 80px 0 30px;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-
-        .footer-col h5 {
-            color: var(--white);
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
+        footer { background: var(--dark); color: #94a3b8; padding: 80px 0 30px; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 50px; }
+        .footer-col h5 { color: var(--white); margin-bottom: 25px; font-size: 1.1rem; font-weight: 700; }
         .footer-col ul li { margin-bottom: 15px; }
         .footer-col ul li a:hover { color: var(--primary); }
-
         .social-icons { margin-top: 20px; }
-        .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px; height: 40px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            margin-right: 10px;
-            color: var(--white);
-            transition: 0.3s;
-        }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 50%; margin-right: 10px; color: var(--white); transition: 0.3s; }
         .social-icons a:hover { background: var(--primary); transform: translateY(-3px); }
+        .copyright { text-align: center; border-top: 1px solid #1e293b; padding-top: 30px; font-size: 0.95rem; }
 
-        .copyright {
-            text-align: center;
-            border-top: 1px solid #1e293b;
-            padding-top: 30px;
-            font-size: 0.95rem;
-        }
-
-        /* --- Responsive --- */
+        /* --- Responsive (Ajustado) --- */
         @media (max-width: 968px) {
             .hero h1 { font-size: 3rem; }
             .stats-grid { gap: 50px; }
         }
 
         @media (max-width: 768px) {
-            .nav-links, .btn-primary.nav-btn { display: none; } /* Ocultar menú en móvil simple */
+            .nav-links, .btn-primary.nav-btn { display: none; }
             .logo { flex-grow: 1; justify-content: center; }
             
             .hero {
+                padding-top: 100px;
+                padding-bottom: 40px; /* Reducir padding en móvil */
+            }
+
+            /* Contenedor Grid a una sola columna */
+            .hero > .container {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding-top: 100px;
                 gap: 40px;
             }
             
@@ -391,8 +293,14 @@
             .hero-content p { margin: 0 auto 30px; }
             .btn-outline-light { display: block; margin: 15px auto 0; width: fit-content;}
 
-            /* En móvil, el código deja de flotar para no marear y se reduce */
-            .code-window.animate-float { animation: none; margin-top: 20px; transform: scale(0.9); }
+            /* Corrección Móvil para la ventana de código */
+            .code-window { 
+                max-width: 90%; /* Hace que ocupe casi todo el ancho disponible */
+                margin: 0 auto; /* Centra el bloque de código cuando es el único elemento */
+                justify-self: center; /* Mantiene el centrado en la celda del grid (ahora única columna) */
+                animation: none; /* Desactivar la animación de flotación en móvil */
+                transform: scale(1); /* Asegura que no haya scaling */
+            }
             
             .stats-grid { flex-direction: column; gap: 30px; }
             .footer-content { flex-direction: column; }
@@ -419,10 +327,10 @@
     </header>
 
     <section class="hero" id="inicio">
-        <div class="container" style="display: grid; grid-template-columns: inherit; gap: inherit; align-items: center;">
+        <div class="container">
             
-            <div class="hero-content">
-                <div class="animate-fade-up" style="display:inline-flex; align-items:center; background:rgba(255,255,255,0.1); backdrop-filter:blur(5px); color:var(--accent); padding: 6px 14px; border-radius:30px; font-size:0.9rem; font-weight:700; margin-bottom:20px; border:1px solid rgba(255,193,7,0.3);">
+            <div class="hero-content animate-fade-up">
+                <div class="delay-1" style="display:inline-flex; align-items:center; background:rgba(255,255,255,0.1); backdrop-filter:blur(5px); color:var(--accent); padding: 6px 14px; border-radius:30px; font-size:0.9rem; font-weight:700; margin-bottom:20px; border:1px solid rgba(255,193,7,0.3);">
                     <span style="margin-right: 8px;">🇧🇴</span> Comunidad Oficial
                 </div>
                 
